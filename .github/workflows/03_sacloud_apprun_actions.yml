@@ -1,9 +1,8 @@
 name: 03 Sacloud Apprun Actions
 
 on:
-  push:
-    branches:
-      - master
+  pull_request:
+    branches: [ "master" ]
 
 jobs:
   deploy:
