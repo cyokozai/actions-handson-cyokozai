@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"html"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -63,9 +64,9 @@ func main() {
         var msg string
         if r.Method == "POST" {
             r.ParseForm()
-            msg = r.FormValue("msg")
+            msg = html.EscapeString(r.FormValue("msg"))
         } else {
-            msg = r.URL.Query().Get("msg")
+            msg = html.EscapeString(r.URL.Query().Get("msg"))
         }
         if msg == "" {
             http.Error(w, "msg required", 400)
